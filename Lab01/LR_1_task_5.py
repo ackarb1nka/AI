@@ -9,18 +9,13 @@ df['predicted_LR'] = (df.model_LR >= 0.5).astype('int')
 #print(df.head(n=5))
 from sklearn.metrics import confusion_matrix
 cm=confusion_matrix(df.actual_label.values, df.predicted_RF.values)
-#print(cm)
 def find_TP(y_true, y_pred):
-    # counts the number of true positives (y_true = 1, y_pred = 1)
     return sum((y_true == 1) & (y_pred == 1))
 def find_FN(y_true, y_pred):
-    # counts the number of false negatives (y_true = 1, y_pred = 0)
     return sum((y_true == 1) & (y_pred == 0))# your code here
 def find_FP(y_true, y_pred):
-    # counts the number of false positives (y_true = 0, y_pred = 1)
     return sum((y_true == 0) & (y_pred == 1))# your code here
 def find_TN(y_true, y_pred):
-    # counts the number of true negatives (y_true = 0, y_pred = 0)
     return sum((y_true == 0) & (y_pred == 0))# your code here
 print('TP:',find_TP(df.actual_label.values, df.predicted_RF.values))
 print('FN:',find_FN(df.actual_label.values, df.predicted_RF.values))
@@ -38,7 +33,6 @@ def domanskyi_confusion_matrix(y_true, y_pred):
     TP,FN,FP,TN = find_conf_matrix_values(y_true,y_pred)
     return np.array([[TN,FP],[FN,TP]])
 cm = domanskyi_confusion_matrix(df.actual_label.values, df.predicted_RF.values)
-#print(cm)
 assert  np.array_equal(domanskyi_confusion_matrix(df.actual_label.values, df.predicted_RF.values), confusion_matrix(df.actual_label.values, df.predicted_RF.values) ), 'domanskyi_confusion_matrix() is not correct for RF'
 assert  np.array_equal(domanskyi_confusion_matrix(df.actual_label.values, df.predicted_LR.values),confusion_matrix(df.actual_label.values, df.predicted_LR.values) ), 'domanskyi_confusion_matrix() is not correct for LR'
 from sklearn.metrics import accuracy_score
@@ -74,7 +68,6 @@ print('Precision LR: %.3f'%(domanskyi_precision_score(df.actual_label.values, df
 from sklearn.metrics import f1_score
 f1_score(df.actual_label.values, df.predicted_RF.values)
 def domanskyi_f1_score(y_true, y_pred):
-    # calculates the F1 score
     recall = domanskyi_recall_score(y_true,y_pred)
     precision = domanskyi_precision_score(y_true,y_pred)
     return 2* (precision * recall)/(precision+recall)
