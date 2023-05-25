@@ -48,7 +48,6 @@ print('Accuracy LR: %.3f'%(domanskyi_accuracy_score(df.actual_label.values, df.p
 from sklearn.metrics import recall_score
 recall_score(df.actual_label.values, df.predicted_RF.values)
 def domanskyi_recall_score(y_true, y_pred):
-    # calculates the fraction of positive samples predicted correctly
     TP,FN,FP,TN = find_conf_matrix_values(y_true,y_pred)
     return TP/(TP+FN)
 assert domanskyi_recall_score(df.actual_label.values, df.predicted_RF.values) == recall_score(df.actual_label.values, df.predicted_RF.values), 'domanskyi_accuracy_score failed on RF'
@@ -58,7 +57,6 @@ print('Recall LR: %.3f'%(domanskyi_recall_score(df.actual_label.values, df.predi
 from sklearn.metrics import precision_score
 precision_score(df.actual_label.values, df.predicted_RF.values)
 def domanskyi_precision_score(y_true, y_pred):
-    # calculates the fraction of predicted positives samples that are actually positive
     TP,FN,FP,TN = find_conf_matrix_values(y_true,y_pred)
     return TP/(TP+FP)
 assert domanskyi_precision_score(df.actual_label.values, df.predicted_RF.values) == precision_score(df.actual_label.values, df.predicted_RF.values), 'domanskyi_accuracy_score failed on RF'
